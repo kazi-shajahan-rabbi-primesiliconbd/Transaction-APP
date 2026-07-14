@@ -9,10 +9,14 @@ import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.rabbi.expensetracker.data.Transaction
 import com.rabbi.expensetracker.ui.MainViewModel
 import com.rabbi.expensetracker.ui.components.CategoryPieChart
 import com.rabbi.expensetracker.ui.components.EditTransactionDialog
@@ -30,7 +34,7 @@ fun DashboardScreen(viewModel: MainViewModel, onSeeAll: () -> Unit) {
     val breakdown by viewModel.categoryBreakdown.collectAsStateWithLifecycle()
     val transactions by viewModel.monthTransactions.collectAsStateWithLifecycle()
     val balance = income - expense
-    var editingTransaction by androidx.compose.runtime.remember { androidx.compose.runtime.mutableStateOf<com.rabbi.expensetracker.data.Transaction?>(null) }
+    var editingTransaction by remember { mutableStateOf<Transaction?>(null) }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
